@@ -1,0 +1,18 @@
+<h1>Edit Profile</h1>
+<hr>
+<div class="col-md-4">
+  <form autocomplete="off" [formGroup]="editForm" (ngSubmit)='UpdateUserInfo(editForm.value)' novalidate>
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input formControlName ='firstName' name='firstName' id="firstName" type="text" class="form-control" placeholder="First Name..." />
+      <em *ngIf="!validateFirstName()">Required</em>
+    </div>
+    <div class="form-group" >
+      <label for="lastName">Last Name:</label>
+      <input formControlName='lastName' name='lastName' id="lastName" type="text" class="form-control"  placeholder="Last Name..." />
+      <em *ngIf="!validateLastName()">Required</em>
+    </div>
+    <button type="submit"  class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-default" (click)='cancel()'>Cancel</button>
+  </form>
+</div>

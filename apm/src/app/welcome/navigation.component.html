@@ -1,0 +1,10 @@
+<nav class='navbar navbar-light bg-light'>
+    <a class='navbar-brand'>{{pageTitle}}</a>
+    <ul class='nav nav-pills'>
+      <li><a class='nav-link' routerLink='/welcome'>Home</a></li>
+      <li><a class='nav-link' routerLink='/products'>Product List</a></li>
+      <li *ngIf="!userService.isAuthenticated()"><a class='nav-link' routerLink='/login'>Login</a></li>
+      <li *ngIf="userService.isAuthenticated()"><a class='nav-link'>Welcome {{userService?.currentUser?.firstName}}</a></li>
+      <li *ngIf="userService.isAuthenticated()"><a class='nav-link' routerLink='/edit'>Edit Profile</a></li>
+    </ul>
+  </nav>
