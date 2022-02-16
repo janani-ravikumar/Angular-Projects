@@ -13,10 +13,9 @@ export class UserComponent implements OnInit {
   editForm!: FormGroup;
   firstName!: FormControl;
   lastName!: FormControl;
-
+  homepageUrl: string = "/welcome";
   constructor(private userService: UserService, private router: Router) { }
   
-
   ngOnInit(): void {
     this.firstName = new FormControl(
       this.userService.currentUser?.firstName, Validators.required
@@ -32,7 +31,7 @@ export class UserComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(["/welcome"]);
+    this.router.navigate([this.homepageUrl]);
   }
 
   validateFirstName() {
@@ -46,8 +45,7 @@ export class UserComponent implements OnInit {
   UpdateUserInfo(formValues: { firstName: string; lastName: string; }) {
     if(this.editForm.valid) {
       this.userService.UpdateInfo(formValues.firstName, formValues.lastName)
-      this.router.navigateByUrl("/products")
+      this.router.navigateByUrl(this.homepageUrl)
     }
   }
-
 }
