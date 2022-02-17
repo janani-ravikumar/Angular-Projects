@@ -8,5 +8,5 @@ import { UserService } from '../user/user.service';
 export class NavigationComponent{
   public pageTitle = 'My Angular App';
 
-  constructor(public userService: UserService) { }
+  constructor(public readonly userService: UserService) { }
 }

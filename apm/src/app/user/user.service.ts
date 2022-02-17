@@ -7,9 +7,9 @@ import { IUser } from './user';
 
 export class UserService {
 
-  public currentUser!: IUser | null;
+  public currentUser: IUser | null = null;
     
-  login(userName: string, password: string) {
+  public login(userName: string, password: string) {
     this.currentUser = {
       id : 1,
       firstName: userName,
@@ -17,15 +17,14 @@ export class UserService {
     }
   }
 
-  isAuthenticated() {
+  public isAuthenticated() {
     return Boolean(this.currentUser);
   }
 
-  UpdateInfo(firstName: string, lastName: string) {
-    this.currentUser = {
-      id : 1,
-      firstName: firstName,
-      lastName: lastName
+  public UpdateInfo(firstName: string, lastName: string) {
+    if (this.currentUser !== null) {
+    this.currentUser.firstName = firstName;
+    this.currentUser.lastName = lastName;
     }
   }
 }

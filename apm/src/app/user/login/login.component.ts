@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
-import { ILoginFormValues } from './login-form-values';
 
 @Component({
   templateUrl: './login.component.html',
@@ -11,15 +10,15 @@ import { ILoginFormValues } from './login-form-values';
 export class LoginComponent{
   public userName: any;
   public password: any; 
-  private homepageUrl = "/welcome";
-  constructor(private userService: UserService, private router: Router) { }
+  private readonly homepageUrl = "/welcome";
+  constructor(private readonly userService: UserService, private readonly router: Router) { }
 
-  login(formValues: ILoginFormValues) {
-    this.userService.login(formValues.userName, formValues.password)
+  public login() {
+    this.userService.login(this.userName, this.password)
     this.router.navigate([this.homepageUrl])
   }
 
-  cancel() {
+  public cancel() {
     this.router.navigate([this.homepageUrl]);
   }
 }

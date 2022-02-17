@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IUser } from './user';
 import { UserService } from './user.service';
 
 @Component({
@@ -13,15 +12,23 @@ export class UserComponent implements OnInit {
   public editForm!: FormGroup;
   private firstName!: FormControl;
   private lastName!: FormControl;
-  private homepageUrl = "/welcome";
-  constructor(private userService: UserService, private router: Router) { }
+  private readonly homepageUrl = "/welcome";
+  constructor(private readonly userService: UserService, private readonly router: Router) { }
   
+  public get FirstName() {
+    return this.firstName.value;
+  }
+
+  public get LastName() {
+    return this.lastName.value;
+  }
+
   ngOnInit(): void {
     this.firstName = new FormControl(
-      this.userService.currentUser?.firstName, Validators.required
+      this.userService.currentUser?.firstName ?? '', Validators.required
     );
     this.lastName = new FormControl(
-      this.userService.currentUser?.lastName, Validators.required
+      this.userService.currentUser?.lastName ?? '', Validators.required
     );
 
     this.editForm = new FormGroup({
@@ -30,21 +37,14 @@ export class UserComponent implements OnInit {
     })
   }
 
-  cancel() {
+  public cancel() {
     this.router.navigate([this.homepageUrl]);
   }
 
-  validateFirstName() {
-    return this.firstName.valid || this.firstName.untouched;
-  }
-
-  validateLastName() {
-    return this.lastName.valid;
-  }
-
-  UpdateUserInfo(formValues: IUser) {
-    if(this.editForm.valid) {
-      this.userService.UpdateInfo(formValues.firstName, formValues.lastName)
+  public UpdateUserInfo() {
+    if (this.editForm.valid) {
+      var editFormValue = this.editForm.value;
+      this.userService.UpdateInfo(editFormValue?.firstName, editFormValue?.lastName)
       this.router.navigateByUrl(this.homepageUrl)
     }
   }
