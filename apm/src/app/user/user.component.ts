@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IUser } from './user';
 import { UserService } from './user.service';
 
 @Component({
-  selector: 'pm-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
 
-  editForm!: FormGroup;
-  firstName!: FormControl;
-  lastName!: FormControl;
-  homepageUrl: string = "/welcome";
+  public editForm!: FormGroup;
+  private firstName!: FormControl;
+  private lastName!: FormControl;
+  private homepageUrl = "/welcome";
   constructor(private userService: UserService, private router: Router) { }
   
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class UserComponent implements OnInit {
     return this.lastName.valid;
   }
 
-  UpdateUserInfo(formValues: { firstName: string; lastName: string; }) {
+  UpdateUserInfo(formValues: IUser) {
     if(this.editForm.valid) {
       this.userService.UpdateInfo(formValues.firstName, formValues.lastName)
       this.router.navigateByUrl(this.homepageUrl)

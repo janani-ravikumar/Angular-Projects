@@ -6,7 +6,7 @@ import { UserService } from '../user/user.service';
   templateUrl: './navigation.component.html'
 })
 export class NavigationComponent{
-  pageTitle : string = 'My Angular App';
+  public pageTitle = 'My Angular App';
 
   constructor(public userService: UserService) { }
 }
