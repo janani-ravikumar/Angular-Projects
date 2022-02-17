@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
+import { ILoginFormValues } from './login-form-values';
 
 @Component({
   templateUrl: './login.component.html',
@@ -8,12 +9,12 @@ import { UserService } from '../user.service';
 })
 
 export class LoginComponent{
-  userName: any;
-  password: any; 
-  homepageUrl: string = "/welcome";
+  public userName: any;
+  public password: any; 
+  private homepageUrl = "/welcome";
   constructor(private userService: UserService, private router: Router) { }
 
-  login(formValues: any) {
+  login(formValues: ILoginFormValues) {
     this.userService.login(formValues.userName, formValues.password)
     this.router.navigate([this.homepageUrl])
   }

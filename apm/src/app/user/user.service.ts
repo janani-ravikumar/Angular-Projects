@@ -7,7 +7,7 @@ import { IUser } from './user';
 
 export class UserService {
 
-  currentUser: IUser | undefined;
+  public currentUser!: IUser | null;
     
   login(userName: string, password: string) {
     this.currentUser = {
@@ -18,7 +18,7 @@ export class UserService {
   }
 
   isAuthenticated() {
-    return !!this.currentUser;
+    return Boolean(this.currentUser);
   }
 
   UpdateInfo(firstName: string, lastName: string) {
