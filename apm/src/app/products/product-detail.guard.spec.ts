@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ProductDetailGuard } from './product-detail-guard.guard';
+import { ProductDetailGuard } from './product-detail.guard';
 
-describe('ProductDetailGuardGuard', () => {
+describe('ProductDetailGuard', () => {
   let guard: ProductDetailGuard;
 
   beforeEach(() => {

@@ -7,6 +7,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ProductModule } from './products/product.module';
 import { NavigationComponent } from './welcome/navigation.component';
 import { UserModule } from './user/user.module';
+import { MoviesModule } from './movies/movies.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserModule } from './user/user.module';
       { path: '**', redirectTo: 'welcome', pathMatch: 'full'}
    ]),
     ProductModule,
-    UserModule
+    UserModule,
+    MoviesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,9 +3,7 @@ import { IProduct } from "./product";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, tap, throwError } from "rxjs";
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 
 export class ProductService {
 

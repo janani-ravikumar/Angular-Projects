@@ -4,8 +4,9 @@ import { RouterModule } from '@angular/router';
 import { ProductListComponent } from './product-list.component';
 import { ConvertToSpacesPipe } from '../shared/convert-to-spaces.pipe';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { ProductDetailGuard } from './product-detail-guard.guard';
+import { ProductDetailGuard } from './product-detail.guard';
 import { SharedModule } from '../shared/shared.module';
+import { ProductService } from './product.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,9 @@ import { SharedModule } from '../shared/shared.module';
       },
     ]),
     SharedModule
+  ],
+  providers: [
+   ProductService
   ]
 })
 export class ProductModule { }
