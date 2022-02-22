@@ -8,8 +8,8 @@ import { UserService } from '../user.service';
 })
 
 export class LoginComponent{
-  public userName: any;
-  public password: any; 
+  public userName: string = '';
+  public password: string = ''; 
   private readonly homepageUrl = "/welcome";
   constructor(private readonly userService: UserService, private readonly router: Router) { }
 

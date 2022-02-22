@@ -9,18 +9,18 @@ import { UserService } from './user.service';
 })
 export class UserComponent implements OnInit {
 
-  public editForm!: FormGroup;
-  private firstName!: FormControl;
-  private lastName!: FormControl;
+  public editForm: FormGroup| undefined;
+  private firstName: FormControl | undefined;
+  private lastName: FormControl | undefined;
   private readonly homepageUrl = "/welcome";
   constructor(private readonly userService: UserService, private readonly router: Router) { }
   
-  public get FirstName() {
-    return this.firstName.value;
+  public isFirstNameValid(): boolean {
+    return this.firstName?.value !== '';
   }
 
-  public get LastName() {
-    return this.lastName.value;
+  public isLastNameValid(): boolean {
+    return this.lastName?.value !== '';
   }
 
   ngOnInit(): void {
@@ -42,9 +42,9 @@ export class UserComponent implements OnInit {
   }
 
   public UpdateUserInfo() {
-    if (this.editForm.valid) {
+    if (this.editForm?.valid) {
       var editFormValue = this.editForm.value;
-      this.userService.UpdateInfo(editFormValue?.firstName, editFormValue?.lastName)
+      this.userService.UpdateInfo(editFormValue.firstName, editFormValue.lastName)
       this.router.navigateByUrl(this.homepageUrl)
     }
   }

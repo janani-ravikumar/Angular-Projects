@@ -15,11 +15,11 @@ export class UserService {
     }
   }
 
-  public isAuthenticated() {
-    return Boolean(this.currentUser);
+  public isAuthenticated() : boolean {
+    return this.currentUser !== null;
   }
 
-  public UpdateInfo(firstName: string, lastName: string) {
+  public UpdateInfo(firstName: string, lastName: string): void {
     if (this.currentUser !== null) {
     this.currentUser.firstName = firstName;
     this.currentUser.lastName = lastName;
