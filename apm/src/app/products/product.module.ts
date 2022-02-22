@@ -27,7 +27,8 @@ import { ProductService } from './product.service';
     SharedModule
   ],
   providers: [
-   ProductService
+   ProductService,
+   ProductDetailGuard
   ]
 })
 export class ProductModule { }
