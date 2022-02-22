@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IUser } from './user';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class UserService {
 
