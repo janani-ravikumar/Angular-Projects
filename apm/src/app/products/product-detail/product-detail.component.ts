@@ -4,8 +4,7 @@ import { IProduct } from '../product';
 import { ProductService } from '../product.service';
 
 @Component({
-  templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  templateUrl: './product-detail.component.html'
 })
 export class ProductDetailComponent implements OnInit {
 

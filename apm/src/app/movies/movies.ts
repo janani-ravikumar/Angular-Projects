@@ -1,6 +1,5 @@
 export interface IMoviesResult {
     results: IMovies[]
-   
 }
 
 export interface IMovies {
