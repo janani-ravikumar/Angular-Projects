@@ -3,8 +3,18 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { UserService } from './user.service';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'edit',
+    component: UserComponent,
+  },
+];
 
 @NgModule({
   declarations: [
@@ -15,13 +25,8 @@ import { UserService } from './user.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild([
-      { path: 'login', component: LoginComponent},
-      { path: 'edit', component: UserComponent}
-    ])
+    RouterModule.forChild(routes),
   ],
-  providers: [
-    UserService
-  ]
+  exports: [RouterModule]
 })
 export class UserModule { }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { IUser } from './user';
 
-@Injectable()
-
+@Injectable({
+    providedIn: 'root'
+})
 export class UserService {
 
   public currentUser: IUser | null = null;

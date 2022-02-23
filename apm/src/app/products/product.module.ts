@@ -1,12 +1,23 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { ProductListComponent } from './product-list.component';
+import { RouterModule, Routes } from '@angular/router';
 import { ConvertToSpacesPipe } from '../shared/convert-to-spaces.pipe';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { ProductDetailGuard } from './product-detail.guard';
 import { SharedModule } from '../shared/shared.module';
+import { ProductDetailGuard } from './product-detail.guard';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductListComponent } from './product-list.component';
 import { ProductService } from './product.service';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: ProductListComponent,
+  },
+  {
+    path: ':id',
+    component: ProductDetailComponent,
+    canActivate: [ProductDetailGuard]
+  }
+];
 
 @NgModule({
   declarations: [
@@ -14,21 +25,14 @@ import { ProductService } from './product.service';
     ConvertToSpacesPipe,
     ProductDetailComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-      { path: 'products', component: ProductListComponent },
-      { 
-        path: 'products/:id',
-        canActivate: [ProductDetailGuard], 
-        component: ProductDetailComponent
-      },
-    ]),
+    imports: [
+    RouterModule.forChild(routes),
     SharedModule
   ],
   providers: [
-   ProductService,
-   ProductDetailGuard
-  ]
+    ProductService,
+    ProductDetailGuard
+   ],
+  exports: [RouterModule]
 })
 export class ProductModule { }
