@@ -3,12 +3,13 @@
     <ul class='nav nav-pills'>
       <li><a class='nav-link' routerLink='/welcome'>Home</a></li>
       <li><a class='nav-link' routerLink='/products'>Product List</a></li>
+      <li><a class='nav-link' routerLink='/movies'>Movies List</a></li>
       <ng-container *ngIf="userService.isAuthenticated() else login">
           <li><a class='nav-link'>Welcome {{userService?.currentUser?.firstName}}</a></li>
-          <li><a class='nav-link' routerLink='/edit'>Edit Profile</a></li>
+          <li><a class='nav-link' routerLink='/user/edit'>Edit Profile</a></li>
       </ng-container>
       <ng-template #login>
-          <li><a class='nav-link' routerLink='/login'>Login</a></li>
+          <li><a class='nav-link' routerLink='/user/login'>Login</a></li>
       </ng-template>
     </ul>
   </nav>
