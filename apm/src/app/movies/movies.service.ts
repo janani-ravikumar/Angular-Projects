@@ -1,18 +1,17 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
-import { IMoviesResult } from './movies';
+import { catchError, map, Observable, throwError } from 'rxjs';
+import { IMovies, IMoviesResult } from './movies';
 
 @Injectable()
 export class MoviesService {
 
+  private static readonly url = "https://swapi.dev/api/films/";
   constructor(private readonly http: HttpClient) { }
 
-  public getMovies(): Observable<IMoviesResult>  {
-    const url = "https://swapi.dev/api/films/";
-
-    return this.http.get<IMoviesResult>(url).pipe(
-      tap(data => console.log(JSON.stringify(data))),
+  public getMovies(): Observable<IMovies[]>  {
+    return this.http.get<IMoviesResult>(MoviesService.url).pipe(
+      map((data: IMoviesResult) =>  data.results),
       catchError(this.handleError)
     );
   }
@@ -24,7 +23,6 @@ export class MoviesService {
     } else {
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
-    console.error(errorMessage);
     return throwError(() => errorMessage);
   }
 }
