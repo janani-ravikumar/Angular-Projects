@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ProductListComponent } from "./product-list.component";
 import { ProductService } from "./product.service";
@@ -38,7 +38,6 @@ describe('ProductListComponent', () => {
         fixture = TestBed.createComponent(ProductListComponent);
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
-
         fixture.detectChanges();
     });
 
@@ -57,6 +56,7 @@ describe('ProductListComponent', () => {
     it('should toggle the button text when the toggle button is clicked', () => {
         component.showImage = false;
         var toggleButton = debugElement.nativeElement.querySelector('button');
+
         toggleButton.click();
         fixture.detectChanges();
 
@@ -89,16 +89,16 @@ describe('ProductListComponent', () => {
 
     describe('ProductsTable', () => {
         it('should display table if products list is not empty', () => {
-            var table = debugElement.nativeElement.querySelector('table');
             productService.getProducts.and.returnValue(of(products));
-
             component.ngOnInit();
             fixture.detectChanges();
+
+            var table = debugElement.nativeElement.querySelector('table');
 
             expect(table).toBeTruthy();
         });
 
-        it('should not display table if products list is empty', () => {           
+        it('should not display table if products list is empty', () => {
             component.products = [];
             fixture.detectChanges();
 
@@ -116,35 +116,37 @@ describe('ProductListComponent', () => {
         });
 
         it('should display the releaseDate in shortDate format', () => {
-            var element = debugElement.nativeElement.querySelector('table>tbody tr:nth-child(1) td:nth-child(4)');
             var pipe = new DatePipe('en-US');
             const formattedDate = pipe.transform(products[0].releaseDate, 'shortDate');
+
+            var element = debugElement.nativeElement.querySelector('table>tbody tr:nth-child(1) td:nth-child(4)');
 
             expect(element.textContent).toEqual(formattedDate);
         });
 
         it('should display the currency in USD format', () => {
-            var element = debugElement.nativeElement.querySelector('table>tbody tr:nth-child(1) td:nth-child(5)');
             var pipe = new CurrencyPipe('en-US');
             const formattedDate = pipe.transform(products[0].price, 'USD', 'symbol', '1.2-2');
+
+            var element = debugElement.nativeElement.querySelector('table>tbody tr:nth-child(1) td:nth-child(5)');
 
             expect(element.textContent).toEqual(formattedDate);
         });
 
         it('should display the product image if showImage value is false', () => {
-            var image = debugElement.nativeElement.querySelector('img');
-
             component.showImage = true;
             fixture.detectChanges();
+
+            var image = debugElement.nativeElement.querySelector('img');
 
             expect(image).toBeDefined();
         });
 
         it('should hide the product image if showImage value is false', () => {
-            var image = debugElement.nativeElement.querySelector('img');
-
             component.showImage = false;
             fixture.detectChanges();
+
+            var image = debugElement.nativeElement.querySelector('img');
 
             expect(image).toBeNull();
         });
