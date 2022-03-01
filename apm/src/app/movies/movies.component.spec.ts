@@ -10,11 +10,10 @@ describe('MoviesComponent', () => {
     let fixture: ComponentFixture<MoviesComponent>,
         debugElement: DebugElement,
         component: MoviesComponent,
-        moviesServiceStub: Partial<MoviesService>,
         moviesService: any
 
     beforeEach(() => {
-        moviesServiceStub = jasmine.createSpyObj('MoviesService', ['getMovies']);
+        const moviesServiceStub = jasmine.createSpyObj('MoviesService', ['getMovies']);
         TestBed.configureTestingModule({
             declarations: [
                 MoviesComponent
@@ -44,7 +43,6 @@ describe('MoviesComponent', () => {
     });
 
     describe('MoviesTable', () => {
-
         it('should display the director name in lowercase', () => {
             var element = debugElement.nativeElement.querySelector('table>tbody tr:nth-child(1) td:nth-child(2)');
 

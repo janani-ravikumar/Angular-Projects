@@ -7,7 +7,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 describe('MoviesService', () => {
     let moviesService: MoviesService,
         mockHttp: HttpTestingController;
-        
+
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
@@ -18,7 +18,7 @@ describe('MoviesService', () => {
             ]
         });
 
-        mockHttp = TestBed.get(HttpTestingController);
+        mockHttp = TestBed.inject(HttpTestingController);
         moviesService = TestBed.inject(MoviesService);
     });
 
@@ -29,12 +29,14 @@ describe('MoviesService', () => {
     describe('getMovies', () => {
         const moviesApiUrl = "https://swapi.dev/api/films/";
         it('should get the list of movies', () => {
-            var movies: IMovies[] = [{
-                title: "The Empire Strikes Back",
-                director: "Irvin kershner",
-                characters: ["Jim, Joe"],
-                created: "2014-05-10"
-            }];
+            var movies: IMovies[] = [
+                {
+                    title: "The Empire Strikes Back",
+                    director: "Irvin kershner",
+                    characters: ["Jim, Joe"],
+                    created: "2014-05-10"
+                }
+            ];
             var moviesResults: IMoviesResult = {
                 results: movies
             };
@@ -44,7 +46,7 @@ describe('MoviesService', () => {
                 expect(response).toEqual(movies);
             });
 
-            let request = mockHttp.expectOne(moviesApiUrl);
+            var request = mockHttp.expectOne(moviesApiUrl);
             request.flush(moviesResults);
             expect(request.request.method).toBe("GET");
         });
@@ -63,7 +65,7 @@ describe('MoviesService', () => {
                 }
             });
 
-            let request = mockHttp.expectOne(moviesApiUrl);
+            var request = mockHttp.expectOne(moviesApiUrl);
             request.flush(errorResponse.error, errorResponse);
             expect(request.request.method).toBe("GET");
         });

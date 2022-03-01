@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit, OnDestroy{
     private _listFilter = '';
     private errorMessage = '';
 
-    constructor(private _productService : ProductService) {};
+    constructor(private readonly _productService : ProductService) {};
 
     public get listFilter() : string {
       return this._listFilter

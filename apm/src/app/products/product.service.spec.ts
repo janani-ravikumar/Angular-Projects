@@ -37,7 +37,7 @@ describe("ProductService", () => {
                 expect(response).toEqual(products);
             });
 
-            let request = mockHttp.expectOne(productsUrl);
+            var request = mockHttp.expectOne(productsUrl);
             request.flush(productArray);
             expect(request.request.method).toBe("GET");
         });
@@ -56,7 +56,7 @@ describe("ProductService", () => {
                 }
             });
 
-            let request = mockHttp.expectOne(productsUrl);
+            var request = mockHttp.expectOne(productsUrl);
             request.flush(errorResponse.error, errorResponse);
             expect(request.request.method).toBe("GET");
         });

@@ -4,15 +4,13 @@ import { UserService } from "../user/user.service";
 import { NavigationComponent } from "./navigation.component"
 
 describe('NavigationComponent', () => {
-
     let fixture: ComponentFixture<NavigationComponent>,
         debugElement: DebugElement,
         component: NavigationComponent,
-        userServiceStub: Partial<UserService>,
         userService: any;
 
     beforeEach(() => {
-        userServiceStub = jasmine.createSpyObj('UserService', ['isAuthenticated']);
+        const userServiceStub = jasmine.createSpyObj('UserService', ['isAuthenticated']);
 
         TestBed.configureTestingModule({
             declarations: [
@@ -27,6 +25,7 @@ describe('NavigationComponent', () => {
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
         fixture.detectChanges();
+
         userService = TestBed.inject(UserService);
     });
 
@@ -38,7 +37,7 @@ describe('NavigationComponent', () => {
         userService.isAuthenticated.and.returnValue(false);
         fixture.detectChanges();
 
-        const link = debugElement.nativeElement.querySelectorAll('.nav-link');
+        var link = debugElement.nativeElement.querySelectorAll('.nav-link');
 
         expect(link[link.length - 1].text).toBe('Login');
     })
@@ -47,7 +46,7 @@ describe('NavigationComponent', () => {
         userService.isAuthenticated.and.returnValue(true);
         fixture.detectChanges();
 
-        const link = debugElement.nativeElement.querySelectorAll('.nav-link');
+        var link = debugElement.nativeElement.querySelectorAll('.nav-link');
 
         expect(link[link.length - 1].text).toBe('Edit Profile');
     })
