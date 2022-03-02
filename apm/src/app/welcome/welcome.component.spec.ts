@@ -22,4 +22,8 @@ describe('WelcomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have the page Title - Home', () => {
+    expect(component.pageTitle).toEqual('Home');
+  });
 });

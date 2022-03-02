@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 
@@ -8,8 +9,9 @@ import { UserService } from '../user.service';
 })
 
 export class LoginComponent{
-  public userName: string = '';
-  public password: string = ''; 
+  @ViewChild('loginForm') loginForm: NgForm | null = null;
+  public userName = '';
+  public password = ''; 
   private readonly homepageUrl = "/welcome";
   constructor(private readonly userService: UserService, private readonly router: Router) { }
 

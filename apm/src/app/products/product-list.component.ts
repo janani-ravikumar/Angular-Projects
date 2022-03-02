@@ -9,30 +9,28 @@ import { ProductService } from "./product.service";
 })
 
 export class ProductListComponent implements OnInit, OnDestroy{
-    pageTitle: string = "Product List";
-    imageWidth: number = 50;
-    imageMargin: number = 2;
-    showImage: boolean = false;
-    sub!: Subscription;
+    public pageTitle = "Product List";
+    public imageWidth = 50;
+    public imageMargin = 2;
+    public showImage = false;
+    public filteredProducts: IProduct[] = [];
+    public products: IProduct[] = [];
+    private sub: Subscription | null = null;
+    private _listFilter = '';
+    private errorMessage = '';
 
-    constructor(private _productService : ProductService) {
-    
-    }
+    constructor(private readonly _productService : ProductService) {};
 
-    filteredProducts: IProduct[] = [];
-
-    private _listFilter: string = '';
-
-    get listFilter() : string {
+    public get listFilter() : string {
       return this._listFilter
     }
 
-    set listFilter(value: string) {
+    public set listFilter(value: string) {
         this._listFilter = value;
         this.filteredProducts = this.performFilter(value);
     }
 
-    performFilter(filterBy: string): IProduct[] {
+    public performFilter(filterBy: string): IProduct[] {
         filterBy = filterBy.toLocaleLowerCase();
         return this.products.filter((product: IProduct) =>
             
@@ -40,10 +38,7 @@ export class ProductListComponent implements OnInit, OnDestroy{
         );
     }
 
-    products: IProduct[] = [];
-    errorMessage: string = '';
-
-    toggleImage(): void {
+    public toggleImage(): void {
       this.showImage = !this.showImage;
     }
 
@@ -59,14 +54,14 @@ export class ProductListComponent implements OnInit, OnDestroy{
     }
 
     ngOnDestroy(): void {
-     this.sub.unsubscribe();
+       this.sub?.unsubscribe();
     }
 
-    onRatingClicked(message: string): void {
+    public onRatingClicked(message: string): void {
        this.pageTitle = 'Product List ' + message;
     }
 
-    getStyleForProductName(product: IProduct) {
+    public getStyleForProductName(product: IProduct) {
         if (product?.starRating > 4 ) {
            return {color: 'green', fontWeight : 'bold'}
         }
@@ -74,7 +69,7 @@ export class ProductListComponent implements OnInit, OnDestroy{
         return {};
     }
 
-    getClassForPrice(product: IProduct) {
+    public getClassForPrice(product: IProduct) {
         if (product?.price > 30 ) {
            return ['highly-priced'];
         }
